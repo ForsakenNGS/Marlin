@@ -124,6 +124,11 @@ void prepare_for_probe_offset_wizard() {
 
     if (ui.wait_for_move) return;
 
+    // Raise Z as if it was homed (prevent bumping into the bed)
+    ui.wait_for_move = true;
+    z_clearance_move();                 
+    ui.wait_for_move = false;
+
     #ifndef PROBE_OFFSET_WIZARD_XY_POS
       #define PROBE_OFFSET_WIZARD_XY_POS XY_CENTER
     #endif
